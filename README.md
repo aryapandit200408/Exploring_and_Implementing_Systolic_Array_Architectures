@@ -35,6 +35,7 @@ Systolic arrays excel in computational tasks requiring regular data flow and int
 ### Design 1: 2x2 Matrix Multiplication with 1-bit data depth in Multisim (Manual Mode)
 I have tried to explore these architecturs in detail. We start by implementing a 2x2 Matrix Multiplication with 1-bit data deptth in NI Multisim 14.
 Please the file at, 
+
 ![image](https://github.com/user-attachments/assets/287ad209-bbbd-4be2-937d-bcab07635aa8)
 
 #### Operation
@@ -51,20 +52,12 @@ We can identify 3 major control steps from our previous manual control steps. Th
 
 So we make a state machine to obtain the same. Let us employ One-Hot-Encoding and the states are T1 (Reset), T2 (Load), T3(Shift).
 
-<center>
-  T1 -> T2 -> T3 -> T3 -> T3 .... Continues
-</center>
+![ T1 -> T2 -> T3 -> T3 -> T3 .... Continues](https://github.com/user-attachments/assets/e46c2d5d-fb44-4800-934b-f6ec6d7c1a36)
 
-<p align= "center">
-  ![image](https://github.com/user-attachments/assets/e46c2d5d-fb44-4800-934b-f6ec6d7c1a36)
 Diagram of the FSM
-</p>
 
 #### Circuit Layout
-![image](https://github.com/user-attachments/assets/aef44776-6bf3-4ded-bdc7-8a042059c0d9)
-<p align= "center">
-Diagram of the Schematic with the FSM
-</p>
+![Diagram of the Schematic with the FSM](https://github.com/user-attachments/assets/aef44776-6bf3-4ded-bdc7-8a042059c0d9)
 
 #### Ouput
 -> The data is 1 bit and the output may be of maximum 3 bits.
@@ -105,10 +98,8 @@ endmodule
 
 ```
 
-<p align = "center"> 
 ![image](https://github.com/user-attachments/assets/345627a3-4bff-4373-bca5-ac4059f3dd4d)
 Resulting Elaborated Design of the PEs
-</p>
 
 
 #### Top Module
@@ -372,13 +363,13 @@ module tb();
     end  
 endmodule
 ```
-<p aiggn = "center">
+
 ![image](https://github.com/user-attachments/assets/f9f0d799-bb42-418a-893a-7e43d3cb7aea)
 Testbench along with the inputs
 
 ![image](https://github.com/user-attachments/assets/7e79c000-d2bd-4b23-b1c4-e1e1593b61a6)
 The testbench simulation results showing the internal processes
-</p>
+
 
 #### Some Interesting Observation While Writing the TestBench Code
 	2D arrays cannot be passed directly into modules and give error. This is because Verilog considers any 2D array as a memory element.
@@ -390,22 +381,21 @@ The testbench simulation results showing the internal processes
 ### Design 4: 4x4 Matrix Multiplication as an extension of the previous 2x2 multiplication circuit using some mux modules, a few more clock cycles and a quarter of the number of formerly used PEs
 Idea: To select and multiply any two rows of X matrix and any two columns of the Y matrix at a time. A multiplexing circuit may be used for choosing the appropriate rows and columns. 
 
-<p align = "center">
   ![image](https://github.com/user-attachments/assets/24331fcd-fb36-4d76-9d7b-fc2494061842)
   ![image](https://github.com/user-attachments/assets/cbc0fce2-b955-40a4-8a8e-6408283093a9)
-</p>
+
 
 The resulting structure uses multiplexers as in:-
-<p align = "center">
+
   ![image](https://github.com/user-attachments/assets/bf186ebf-a82e-46a2-8549-0c9ddd4d58b9)
-</p>
 
 #### Implementation in Multisim
-<p align = "center">
+
 ![image](https://github.com/user-attachments/assets/f6541d93-41d1-4466-acfb-b6c67cc824c1)
-  The implementation in multisim 
+The implementation in multisim 
+
+
 Here Q=0 and W=0 therefore multiplication of (A1x, A2x) and (Bx1, Bx2) is occurring similarly calculations for (Q=0, W=1), (Q=1, W=0), (Q=1, W=1) may be done
-</p>
 
 #### Conclusion
 •	This type of array may use much less hardware, but will be much slower and would require almost four times to be computed
@@ -416,5 +406,4 @@ Untill now, systolic architectures have been explored. These systolic architectu
 1.	HT Kung’s seminal paper
 2.	Prof. Onar Multu’s lectures on systolic arrays
 3.	[digitalsystemdesign.in/systolic-matrix-multiplier/](https://digitalsystemdesign.in/systolic-matrix-multiplier/) : from here I learned the systolic array reduction/cascading technique discussed in section 4.
-
 
